@@ -141,6 +141,20 @@ int main()
     cout << sum2 << "\n";
     cout << "Время суммирования двойной точности,32 потоков =" << t2 - t1 << "\n";
 
+    //3b
+    float** Bsgl = new float* [n];
+    for (int i = 0; i < n; ++i) Bsgl[i] = new float[n];
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j)
+            Bsgl[i][j] = rand();
+    }
+
+    float** Bdbl = new float* [n];
+    for (int i = 0; i < n; ++i) Bdbl[i] = new float[n];
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j)
+            Bdbl[i][j] = rand();
+    }
 
 }
 
