@@ -10,9 +10,10 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_CTYPE, "rus");
-    cout << omp_get_num_procs() << "\n";
+    setlocale(LC_CTYPE, "rus");         //2b
+    cout << omp_get_num_procs() << "\n";    //2c
 
+    //2d
     const int n = 10e2;
     float* Asgl = new float[n];
     double* Adbl = new double[n];
@@ -37,6 +38,7 @@ int main()
     cout << sum2 << "\n";
     cout << "Время суммирования массива двойной точности =" << t2 - t1 << "\n";
 
+    //2e
     sum1 = 0;
     t1 = clock();
     #pragma omp parallel for reduction(+:sum1)
@@ -53,7 +55,92 @@ int main()
     cout << sum2 << "\n";
     cout << "Время суммирования (reduction) массива двойной точности =" << t2 - t1 << "\n";
 
+    //2f
+    //2 потока суммирование
+    sum1 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(2) reduction(+:sum1)
+    for (int i = 0; i < n; ++i) sum1 += Asgl[i];
+    t2 = clock();
+    cout << sum1 << "\n";
+    cout << "Время суммирования одинарной точности,2 потока =" << t2 - t1 << "\n";
+
+    sum2 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(2) reduction(+:sum2)
+    for (int i = 0; i < n; ++i) sum2 += Adbl[i];
+    t2 = clock();
+    cout << sum2 << "\n";
+    cout << "Время суммирования двойной точности,2 потока =" << t2 - t1 << "\n";
+
+    //4 потока суммирование
+    sum1 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(4) reduction(+:sum1)
+    for (int i = 0; i < n; ++i) sum1 += Asgl[i];
+    t2 = clock();
+    cout << sum1 << "\n";
+    cout << "Время суммирования одинарной точности,4 потока =" << t2 - t1 << "\n";
+
+    sum2 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(4) reduction(+:sum2)
+    for (int i = 0; i < n; ++i) sum2 += Adbl[i];
+    t2 = clock();
+    cout << sum2 << "\n";
+    cout << "Время суммирования двойной точности,4 потока =" << t2 - t1 << "\n";
     
+    //8 потоков суммирование
+    sum1 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(8) reduction(+:sum1)
+    for (int i = 0; i < n; ++i) sum1 += Asgl[i];
+    t2 = clock();
+    cout << sum1 << "\n";
+    cout << "Время суммирования одинарной точности,8 потоков =" << t2 - t1 << "\n";
+
+    sum2 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(8) reduction(+:sum2)
+    for (int i = 0; i < n; ++i) sum2 += Adbl[i];
+    t2 = clock();
+    cout << sum2 << "\n";
+    cout << "Время суммирования двойной точности,8 потоков =" << t2 - t1 << "\n";
+
+    //16 потоков суммирование
+    sum1 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(16) reduction(+:sum1)
+    for (int i = 0; i < n; ++i) sum1 += Asgl[i];
+    t2 = clock();
+    cout << sum1 << "\n";
+    cout << "Время суммирования одинарной точности,16 потоков =" << t2 - t1 << "\n";
+
+    sum2 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(16) reduction(+:sum2)
+    for (int i = 0; i < n; ++i) sum2 += Adbl[i];
+    t2 = clock();
+    cout << sum2 << "\n";
+    cout << "Время суммирования двойной точности,16 потоков =" << t2 - t1 << "\n";
+
+    //32 потоков суммирование
+    sum1 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(32) reduction(+:sum1)
+    for (int i = 0; i < n; ++i) sum1 += Asgl[i];
+    t2 = clock();
+    cout << sum1 << "\n";
+    cout << "Время суммирования одинарной точности,32 потоков =" << t2 - t1 << "\n";
+
+    sum2 = 0;
+    t1 = clock();
+    #pragma omp parallel for num_threads(32) reduction(+:sum2)
+    for (int i = 0; i < n; ++i) sum2 += Adbl[i];
+    t2 = clock();
+    cout << sum2 << "\n";
+    cout << "Время суммирования двойной точности,32 потоков =" << t2 - t1 << "\n";
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
