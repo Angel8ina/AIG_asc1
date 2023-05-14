@@ -285,7 +285,7 @@ int main()
     cout << "Время перемножения матриц двойной точности, 8 потоков =" << t2 - t1 << "\n";
 
     t1 = clock();
-#pragma omp parallel for num_threads(16)
+    #pragma omp parallel for num_threads(16)
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j) {
             Csgl[i][j] = 0;
@@ -296,7 +296,7 @@ int main()
     cout << "Время перемножения матриц одинарной точности, 16 потоков =" << t2 - t1 << "\n";
 
     t1 = clock();
-#pragma omp parallel for num_threads(16)
+    #pragma omp parallel for num_threads(16)
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j) {
             Cdbl[i][j] = 0;
@@ -307,7 +307,7 @@ int main()
     cout << "Время перемножения матриц двойной точности, 16 потоков =" << t2 - t1 << "\n";
 
     t1 = clock();
-#pragma omp parallel for num_threads(32)
+    #pragma omp parallel for num_threads(32)
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j) {
             Csgl[i][j] = 0;
@@ -318,7 +318,7 @@ int main()
     cout << "Время перемножения матриц одинарной точности, 32 потоков =" << t2 - t1 << "\n";
 
     t1 = clock();
-#pragma omp parallel for num_threads(32)
+    #pragma omp parallel for num_threads(32)
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j) {
             Cdbl[i][j] = 0;
