@@ -156,15 +156,14 @@ int main()
             Bdbl[i][j] = rand();
     }
 
-    const int m = 1;
-    float** Csgl = new float* [m];
-    for (int i = 0; i < m; ++i) Csgl[i] = new float[n];  //пустая матрица для результата перемножения float
+    float** Csgl = new float* [n];
+    for (int i = 0; i < n; ++i) Csgl[i] = new float[n];  //пустая матрица для результата перемножения float
 
-    double** Cdbl = new double* [m];
-    for (int i = 0; i < m; ++i) Cdbl[i] = new double[n];  //пустая матрица для результата перемножения double
+    double** Cdbl = new double* [n];
+    for (int i = 0; i < n; ++i) Cdbl[i] = new double[n];  //пустая матрица для результата перемножения double
 
     t1 = clock();
-    for (int i = 0; i < m; ++i)
+    for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j) {
             Csgl[i][j] = 0;
             for (int k = 0; k < n; ++k)
@@ -174,7 +173,7 @@ int main()
     cout << "Время перемножения матриц одинарной точности =" << t2 - t1 << "\n";
 
     t1 = clock();
-    for (int i = 0; i < m; ++i)
+    for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j) {
             Cdbl[i][j] = 0;
             for (int k = 0; k < n; ++k)
