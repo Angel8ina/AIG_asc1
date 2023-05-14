@@ -149,13 +149,41 @@ int main()
             Bsgl[i][j] = rand();
     }
 
-    float** Bdbl = new float* [n];
-    for (int i = 0; i < n; ++i) Bdbl[i] = new float[n];
+    double** Bdbl = new double* [n];
+    for (int i = 0; i < n; ++i) Bdbl[i] = new double[n];
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j)
             Bdbl[i][j] = rand();
     }
 
+    const int m = 1;
+    float** Csgl = new float* [m];
+    for (int i = 0; i < m; ++i) Csgl[i] = new float[n];  //пустая матрица для результата перемножения float
+
+    double** Cdbl = new double* [m];
+    for (int i = 0; i < m; ++i) Cdbl[i] = new double[n];  //пустая матрица для результата перемножения double
+
+    t1 = clock();
+    for (int i = 0; i < m; ++i)
+        for (int j = 0; j < n; ++j) {
+            Csgl[i][j] = 0;
+            for (int k = 0; k < n; ++k)
+                Csgl[i][j] += Asgl[i][k] * Bsgl[k][j];
+        }
+    t2 = clock();
+    cout << "Время перемножения матриц одинарной точности =" << t2 - t1 << "\n";
+
+    t1 = clock();
+    for (int i = 0; i < m; ++i)
+        for (int j = 0; j < n; ++j) {
+            Cdbl[i][j] = 0;
+            for (int k = 0; k < n; ++k)
+                Cdbl[i][j] += Adbl[i][k] * Bdbl[k][j];
+        }
+    t2 = clock();
+    cout << "Время перемножения матриц двойной точности =" << t2 - t1 << "\n";
+
+    
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
